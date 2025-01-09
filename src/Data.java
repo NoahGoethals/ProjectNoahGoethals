@@ -4,8 +4,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Main van het programma. Beheert films en reviews.
+ * Dit is de main class van het programma. Het zorgt voor het beheren van films en reviews.
  *
+ * @author Noah Goethals
+ * @version 1.0
  */
 public class Data {
 
@@ -13,7 +15,9 @@ public class Data {
     private static final List<Review> reviewHistory = new ArrayList<>();
 
     /**
-     Startpunt
+     * Hier start het programma.
+     *
+     * @param args Dit zijn de command-line argumenten
      */
     public static void main(String[] args) {
         List<Film> films = new ArrayList<>();
@@ -22,7 +26,9 @@ public class Data {
     }
 
     /**
-     * Laadt films uit een CSV-bestand.
+     * Deze methode laadt films uit een CSV-bestand.
+     *
+     * @param films De lijst waar de films worden opgeslagen
      */
     private static void laadFilms(List<Film> films) {
         try (
@@ -34,7 +40,7 @@ public class Data {
             }
 
             String line;
-            reader.readLine(); // Sla header over
+            reader.readLine(); // Dit overslaat de header
 
             while ((line = reader.readLine()) != null) {
                 try {
@@ -45,18 +51,23 @@ public class Data {
                         LOGGER.warning("Onvoldoende kolommen: " + line);
                     }
                 } catch (Exception e) {
-                    LOGGER.log(Level.SEVERE, "Fout bij regel: " + line, e);
+                    LOGGER.log(Level.SEVERE, "Fout bij het verwerken van de regel: " + line, e);
                 }
             }
 
             System.out.println("Aantal geladen films: " + films.size());
         } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, "Fout bij lezen CSV-bestand.", e);
+            LOGGER.log(Level.SEVERE, "Er is een fout opgetreden bij het lezen van het CSV-bestand.", e);
         }
     }
 
     /**
-     * Splitst een CSV-regel in kolommen.
+     * Splitst een regel uit het CSV-bestand in kolommen.
+     *
+     * @param line   De regel uit het bestand
+     * @param reader De reader die het bestand leest
+     * @return Een lijst met kolommen
+     * @throws IOException Als er een fout is bij het lezen
      */
     private static List<String> parseCsvLine(String line, BufferedReader reader) throws IOException {
         List<String> columns = new ArrayList<>();
@@ -87,7 +98,10 @@ public class Data {
     }
 
     /**
-     * Maakt een filmobject aan.
+     * Deze methode maakt een Film-object.
+     *
+     * @param columns De kolommen met informatie over de film
+     * @return Een nieuw Film-object
      */
     private static Film createFilm(List<String> columns) {
         String title = columns.get(2).replaceAll("^\"|\"$", "");
@@ -99,7 +113,10 @@ public class Data {
     }
 
     /**
-     * Converteert een string naar een integer. Geeft 0 bij fout.
+     * Probeert een string naar een getal te converteren.
+     *
+     * @param value De string die omgezet moet worden
+     * @return De integer-waarde, of 0 als het niet lukt
      */
     private static int safeParseInt(String value) {
         try {
@@ -110,7 +127,9 @@ public class Data {
     }
 
     /**
-     * Start het menu en voert de gekozen optie uit.
+     * Start het menu waar de gebruiker keuzes kan maken.
+     *
+     * @param films De lijst met films
      */
     private static void startMenu(List<Film> films) {
         Scanner scanner = new Scanner(System.in);
@@ -140,7 +159,11 @@ public class Data {
     }
 
     /**
-     * Controleert of invoer een geldig getal is.
+     * Controleert of de invoer een geldig getal is.
+     *
+     * @param scanner De scanner om invoer te lezen
+     * @param prompt  De tekst die wordt weergegeven aan de gebruiker
+     * @return Een geldig getal
      */
     private static int getValidInteger(Scanner scanner, String prompt) {
         int result = -1;
@@ -162,7 +185,10 @@ public class Data {
     }
 
     /**
-     * Voeg een review toe aan een film.
+     * Hiermee kan de gebruiker een review toevoegen.
+     *
+     * @param films   De lijst met films
+     * @param scanner De scanner om invoer te lezen
      */
     private static void voegReviewToe(List<Film> films, Scanner scanner) {
         System.out.print("Titel van de film: ");
@@ -200,7 +226,10 @@ public class Data {
     }
 
     /**
-     * Zoek een film op naam of een deel van de naam.
+     * Zoekt een film op naam of een deel van de naam.
+     *
+     * @param films   De lijst met films
+     * @param scanner De scanner om invoer te lezen
      */
     private static void zoekFilmOpNaam(List<Film> films, Scanner scanner) {
         System.out.print("Voer (een deel van) de titel in: ");
@@ -219,6 +248,9 @@ public class Data {
 
     /**
      * Lijst films van een bepaalde regisseur.
+     *
+     * @param films   De lijst met films
+     * @param scanner De scanner om invoer te lezen
      */
     private static void lijstFilmsVanRegisseur(List<Film> films, Scanner scanner) {
         System.out.print("Naam van de regisseur: ");
@@ -237,6 +269,9 @@ public class Data {
 
     /**
      * Lijst films van een bepaald releasejaar.
+     *
+     * @param films   De lijst met films
+     * @param scanner De scanner om invoer te lezen
      */
     private static void lijstFilmsVanReleasejaar(List<Film> films, Scanner scanner) {
         System.out.print("Geef een releasejaar: ");
@@ -254,7 +289,7 @@ public class Data {
     }
 
     /**
-     * Toont de reviewgeschiedenis.
+     * Laat de gebruiker de reviewgeschiedenis zien.
      */
     private static void bekijkReviewGeschiedenis() {
         if (reviewHistory.isEmpty()) {

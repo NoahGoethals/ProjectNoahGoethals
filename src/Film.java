@@ -2,7 +2,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Klasse die informatie over een film bevat, zoals titel, regisseur, releasejaar, en reviews.
+ * Deze klasse bevat informatie over een film, zoals de titel, regisseur, releasejaar, en reviews.
+ *
+ * @author Noah Goethals
+ * @version 1.0
  */
 public class Film {
     private String title;
@@ -13,8 +16,13 @@ public class Film {
     private List<Review> reviews;
 
     /**
-     * een filmobject aan te maken.
-
+     * Maakt een nieuw Film-object aan.
+     *
+     * @param title De titel van de film
+     * @param director De regisseur van de film
+     * @param releaseYear Het jaar waarin de film is uitgebracht
+     * @param rating De leeftijdsclassificatie van de film
+     * @param duration De duur van de film
      */
     public Film(String title, String director, int releaseYear, String rating, String duration) {
         this.title = title;
@@ -26,56 +34,70 @@ public class Film {
     }
 
     /**
-     Geeft de titel van de film terug.
+     * Geeft de titel van de film terug.
+     *
+     * @return De titel van de film
      */
     public String getTitle() {
         return title;
     }
 
     /**
-     Geeft de regisseur van de film terug.
+     * Geeft de regisseur van de film terug.
+     *
+     * @return De regisseur van de film
      */
     public String getDirector() {
         return director;
     }
 
     /**
-     Geeft het releasejaar van de film terug.
+     * Geeft het releasejaar van de film terug.
+     *
+     * @return Het releasejaar van de film
      */
     public int getReleaseYear() {
         return releaseYear;
     }
 
     /**
-     Geeft de leeftijdsclassificatie van de film terug.
+     * Geeft de leeftijdsclassificatie van de film terug.
+     *
+     * @return De leeftijdsclassificatie van de film
      */
     public String getRating() {
         return rating;
     }
 
     /**
-     Geeft de duur van de film terug.
+     * Geeft de duur van de film terug.
+     *
+     * @return De duur van de film
      */
     public String getDuration() {
         return duration;
     }
 
     /**
-     Geeft de lijst van reviews voor de film terug.
+     * Geeft de lijst van reviews voor de film terug.
+     *
+     * @return Een lijst van reviews
      */
     public List<Review> getReviews() {
         return reviews;
     }
 
     /**
-     Voegt een review toe aan de lijst van reviews.
+     * Voegt een review toe aan de lijst van reviews.
+     *
+     * @param review De review die toegevoegd moet worden
      */
     public void addReview(Review review) {
         this.reviews.add(review);
     }
 
     /**
-     Print alle reviews van de film.
+     * Print alle reviews van de film naar de console.
      */
     public void printReviews() {
         if (reviews.isEmpty()) {
@@ -85,6 +107,11 @@ public class Film {
         }
     }
 
+    /**
+     * Geeft een stringrepresentatie van de film.
+     *
+     * @return Een string met de belangrijkste informatie over de film
+     */
     @Override
     public String toString() {
         return "Film: " + title + " (" + releaseYear + "), Regisseur: " + director + ", Rating: " + rating + ", Duur: " + duration;
