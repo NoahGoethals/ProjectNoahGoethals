@@ -273,9 +273,9 @@ public class Data {
      * @param films   De lijst met films
      * @param scanner De scanner om invoer te lezen
      */
+
     private static void lijstFilmsVanReleasejaar(List<Film> films, Scanner scanner) {
-        System.out.print("Geef een releasejaar: ");
-        int year = Integer.parseInt(scanner.nextLine());
+        int year = getValidInteger(scanner, "Geef een releasejaar: ");
 
         List<Film> gevondenFilms = films.stream()
                 .filter(f -> f.getReleaseYear() == year)
@@ -287,6 +287,7 @@ public class Data {
             gevondenFilms.forEach(f -> System.out.println(f.getTitle()));
         }
     }
+
 
     /**
      * Laat de gebruiker de reviewgeschiedenis zien.
