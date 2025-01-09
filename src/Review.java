@@ -8,7 +8,7 @@ public class Review {
     private String filmTitle;
 
     /**
-     een reviewobject aan te maken.
+     een reviewobject aan maken.
 
      */
     public Review(String author, String description, int score, String filmTitle) {
